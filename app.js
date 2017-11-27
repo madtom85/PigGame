@@ -9,11 +9,14 @@ GAME RULES:
 
 */
 
-var scores, roundScores, activePlayer, //dice
+var scores, roundScores, activePlayer //, dice
 
+/*
 scores = [0, 0];
 roundScore = 0;
 activePlayer = 0;
+*/
+init();
 
 // dice = Math.floor(Math.random() * 6) + 1;
 
@@ -121,3 +124,26 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
 		document.querySelector('.dice').style.display = 'none';
 	}
+	//not using an anonymous function since we don't want to call an anonymous function before another function
+	document.querySelector('.btn-new').addEventListener('click', init)
+
+	function init () {
+	scores = [0, 0];
+	roundScore = 0;
+	activePlayer = 0;
+
+	document.getElementById('score-0').textContent = '0';
+	document.getElementById('score-1').textContent = '0';
+	document.getElementById('current-0').textContent = '0';
+	document.getElementById('current-1').textContent = '0';
+	document.getElementById('name-0').textContent = 'Player 1';
+	document.getElementById('name-1').textContent = 'Player 2';
+	//Winner must not be shown when initializing a new game
+	document.querySelector('.player-0-panel').classList.remove('winner');
+	document.querySelector('.player-1-panel').classList.remove('winner');
+	//you must remove the active class from both to default a new game without active player
+	document.querySelector('.player-0-panel').classList.remove('active');
+	document.querySelector('.player-1-panel').classList.remove('active');
+	//active must be added to start the first player with active
+	document.querySelector('.player-0-panel').classList.add('active');
+	};
