@@ -12,10 +12,10 @@ GAME RULES:
 var scores, roundScores, activePlayer, //dice
 
 scores = [0, 0];
-roundScores = 0;
-activePlayer = 1;
+roundScore = 0;
+activePlayer = 0;
 
-
+// dice = Math.floor(Math.random() * 6) + 1;
 
 //this changes the second player's current score between 1 to 6
 //document.querySelector('#current-' + activePlayer).textContent = dice;
@@ -24,12 +24,12 @@ activePlayer = 1;
 //document.querySelector('#current-' + activePlayer).innerHTML = <em> + 'dice' + </em>;
 
 //this is just to show what is written in the selected ID called getter
-/*var x = document.querySelector('#score-0').textContent;
+/* var x = document.querySelector('#score-0').textContent;
 console.log(x);
 */
 
 //this changes the display property in css to none, which will make the dice hidden in the html
-document.querySelector('.dice').style.display = 'none';
+//document.querySelector('.dice').style.display = 'none';
 
 document.getElementById('score-0').textContent = '0';
 document.getElementById('score-1').textContent = '0';
@@ -38,10 +38,11 @@ document.getElementById('current-1').textContent = '0';
 
 
 
-function btn() {
+/*function btn() {
 	//Do Something
 }
 btn();
+*/
 
 //document.querySelector('.btn-roll').addEventListener('click', btn)
 
@@ -54,5 +55,31 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
 	diceDOM.src = 'dice-' + dice + '.png';
 
 	// 3. Update the round score IF the rolled number is NOT 1
+	if (dice !== 1) {
+		//Add Score
+		//roundScore = roundScore + dice;
+		roundScore += dice;
+		document.querySelector('#current-' + activePlayer).textContent = roundScore;
+	} else {
+		//Next Player
+		/* if (activePlayer === 0) {
+			activePlayer = 1;
+		} else {
+			activePlayer = 0;
+		}
+		*/
+		activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+		roundScore = 0;
+		document.getElementById('current-0').textContent = '0';
+		document.getElementById('current-1').textContent = '0';
+
+		//document.querySelector('.player-0-panel').classList.remove('active');
+		//documnet.querySelector('player-1-panel').classList.add('active');
+
+		document.querySelector('.player-0-panel').classList.toggle('active');
+		document.querySelector('.player-1-panel').classList.toggle('active');
+
+		document.querySelector('.dice').style.display = 'none';
+	}
 
 });
